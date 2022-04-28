@@ -1,0 +1,20 @@
+How to add SWAP on linux
+---------------------------------------
+Check the System for Swap Information
+    swapon -s
+    free -m
+Check available storage
+   df -h
+----------------------------------------
+Create a Swap File
+  sudo dd if=/dev/zero of=/swapfile count=4096 bs=1MiB
+   
+Enable a Swap File
+   sudo chmod 600 /swapfile
+   sudo mkswap /swapfile
+   sudo swapon /swapfile
+   swapon -s
+
+Make the Swap File Permanent
+   sudo nano /etc/fstab
+   /swapfile   swap    swap    sw  0   0
