@@ -1,3 +1,51 @@
+Linux commands:
+---------------
+NOTE: LINUX is a case sensitive, because it is written in C.
+
+pwd -- present working directory
+cd --- change directory
+ls --- list
+ls - l (long list)
+ls -r (list in reverse)
+ls -a (all files include hidden)
+ls -h (shows in KB, MB size of file)
+mkdir -- to create a directory
+rmdir -- to remove a  directory (directory must be empty)
+touch -- for file creation
+rm -- to remove a file
+rm -f --> to remove forcefully
+rm -r -- > to remove directory
+rm -v --> verbose mode for acknowledgment
+cp (source) (destination) --> for copy a file
+cp -r (source) (destination) --> for copy a directory
+cp -f --> forcefully copy
+cp -v --> verbose mode for acknowledgement
+mv (source) (destination) --> move from one place to another place (or) rename purpose
+echo ----> display varables data on screen
+cat --- for printing data on screen and take data from keyboard to file
+	cat file (to see content on screen)
+	cat > file (craete a file & place the content into the file)
+	cat >> file (append the content to the exist content)
+> -- redirect the content
+|(pipe) -- o/p of 1st command to the i/p of 2nd command
+history -- to see previous commands (shows 10 lines only)
+less -- less same as cat but it will show data page by page. it divides page into 24 lines.
+	f --> for forward
+	b --> for backword
+	/ --> search
+	q --> for quit
+more ---> same as less
+wc --> word count (number of lines, words, characters)
+whoami --> shows who is login
+id --> shows the details of user and his existence
+uname -a --> it gives entire system infomation
+head -- shows top 
+tail -- shows bottom
+
+
+
+
+
 How to add SWAP on linux
 ---------------------------------------
 Check the System for Swap Information
