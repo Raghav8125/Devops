@@ -1,0 +1,40 @@
+Install openjdk
+2gb ram
+
+
+Install JFrog Artifactory on Ubuntu
+-------------------------------------
+Step 1: Install Docker Engine
+    Install packages to allow apt to use a repository over HTTPS:
+        sudo apt update
+        sudo apt -y install apt-transport-https ca-certificates curl software-properties-common
+       
+    Add Docker’s official GPG key:
+       
+       curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add 
+       
+    Add stable repository:  
+       sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+       
+   Install Docker CE:
+
+      sudo apt update && sudo apt -y install docker-ce
+      
+      
+Step 2: Download JFrog Artifactory Docker image
+     docker pull docker.bintray.io/jfrog/artifactory-oss:latest
+     
+     docker rum -it -d -p 8081:8081 --name artifactory <name of the pulled image>
+Step 3: Create Data Directory
+    Create data directory on host system to ensure data used on container is persistent.
+
+    sudo mkdir -p /jfrog/artifactory
+    sudo chown -R 1030 /jfrog/
+Step 4: Start JFrog Artifactory container
+      To start an Artifactory container, use the command:
+
+      docker run --name artifactory -d \
+      
+      curl -k https://3.110.108.126:8081/artifcatory  ---- to check port connection
+
+       
