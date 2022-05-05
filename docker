@@ -1,0 +1,27 @@
+ 
+#How to increase Docker container default size?
+
+
+(optional) If you have already downloaded any image via docker pull you need to clean them first - otherwise they won't be resized
+
+docker rmi your_image_name
+
+Edit the storage config
+
+vi /etc/sysconfig/docker-storage
+
+There should be something like DOCKER_STORAGE_OPTIONS="...", change it to DOCKER_STORAGE_OPTIONS="... --storage-opt dm.basesize=100G"
+
+Restart the docker deamon
+
+service docker restart
+
+Pull the image
+
+docker pull your_image_name
+
+(optional) verification
+
+docker run -i -t your_image_name /bin/bash
+
+df -h
