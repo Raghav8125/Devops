@@ -1,0 +1,125 @@
+Prerequisites
+---------------------
+Before installing Prometheus, be sure to complete the following perquisites.
+
+1. Install Nginx
+-----------------------
+Follow the steps below to install Nginx:
+
+
+sudo apt update
+sudo apt install nginx
+ sudo systemctl start nginx
+ sudo systemctl start nginx
+------------------------------------------------
+ 2. Create Prometheus Users
+  sudo useradd --no-create-home --shell /bin/false prome
+ sudo useradd --no-create-home --shell /bin/false node_exporter
+-------------------------------------------
+
+3. Create Prometheus Directories
+$ sudo mkdir /etc/prometheus
+$ sudo mkdir /var/lib/prometheus
+-------------------------------------
+Downloading and Installing Prometheus
+$ wget https://github.com/prometheus/prometheus/releases/download/v2.0.0/
+prometheus-2.0.0.linux-amd64.tar.gz
+$ tar xvf prometheus-2.0.0.linux-amd64.tar.gz
+
+
+Use the following commands to copy the “prometheus” and “promtool” binary files to the /usr/local/bin.
+
+$ sudo cp prometheus-2.0.0.linux-amd64/prometheus /usr/local/bin/
+$ sudo cp prometheus-2.0.0.linux-amd64/promtool /usr/local/bin/
+Next, change the ownership of the files by entering the commands below.
+
+$ sudo chown prome:prome /usr/local/bin/prometheus
+$ sudo chown prome:prome /usr/local/bin/promtool
+After copying the binary files, copy the required libraries to the /etc/prometheus directory. Use the following commands in Terminal to do so:
+
+$ sudo cp -r prometheus-2.0.0.linux-amd64/consoles /etc/prometheus
+$ sudo cp -r prometheus-2.0.0.linux-amd64/console_libraries /etc/prometheus
+Then, use the following commands to change the ownership of the files.
+
+$ sudo chown -R prome:prome /etc/prometheus/consoles
+$ sudo chown -R prome:prome /etc/prometheus/console_libraries
+
+--------------------------------------------------------------
+Prometheus Configuration
+
+sudo nano /etc/prometheus/prometheus.yml
+    Next, copy and paste the following lines into the terminal:
+
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+--------------------------
+$ sudo nano /etc/systemd/system/prometheus.service
+
+
+Next, copy and paste the following lines into the terminal:
+
+[Unit]
+Description=Prometheus
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=prome
+Group=prome
+Type=simple
+ExecStart=/usr/local/bin/prometheus \
+    --config.file /etc/prometheus/prometheus.yml \
+    --storage.tsdb.path /var/lib/prometheus/ \
+    --web.console.templates=/etc/prometheus/consoles \
+    --web.console.libraries=/etc/prometheus/console_libraries
+
+[Install]
+WantedBy=multi-user.target
+------------------------------------------------
+
+$ sudo systemctl daemon-reload
+$ sudo systemctl start prometheus
+$ sudo systemctl enable prometheus
+$ sudo systemctl status prometheus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
